@@ -116,7 +116,8 @@ int main(int argc,char* argv[])
     F.Suffix(tfn,".trc");         //Create the trace file name
     FILE* i=fopen(ifn,"r");       //Open the input file
     if (!i) throw FileException(ifn);
-    tfs.open(tfn); if (!tfs) throw FileException(tfn);
+    //tfs.open(tfn); if (!tfs) throw FileException(tfn);
+    freopen(tfn, "w+", stdout);
     Parser p(i);                   //Redirect the lexer to read the input
                                   //file
     int t=p.Parse();                //Read the first token;
@@ -124,10 +125,13 @@ int main(int argc,char* argv[])
     while (t>0) {                 //Stop on end of file
        t=p.Parse();                 //Read remaining tokens
      }
-     tfs << endl;
-     tfs.close();
+     //tfs << endl;
+     cout << endl;
+     //tfs.close();
+     fclose(stdout);
      fclose(i);
     } catch (...) {
+        fclose(stdout);
         cout << endl;
         cout << "Program terminated!";
         cout << endl;

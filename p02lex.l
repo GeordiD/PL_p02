@@ -30,7 +30,6 @@ using namespace std;
 #include "p02lex.h"
 #include "p02tkn.h"
 
-extern ofstream tfs;
 //--------------------------------------------------------------------
 //Function prototypes and variable definitions
 //--------------------------------------------------------------------
@@ -42,13 +41,13 @@ void TokenPrint(ostream& o,int t);
 //Global Variables                                                    
 //--------------------------------------------------------------------
 static string spelling[]=
-  {"NOTOKEN","AND","ARRAY","BEGAN","DIV","DO","ELSE","END","FOR",
+  {"NOTOKEN","INTLIT","PLUS","MINUS","STAR","SLASH","LPAREN","RPAREN",
+	"RBRACKET","LBRACKET","COLON","SEMICOLON","COMMA","PERIOD",
+	"RANGE","ASSIGNOP","EQU","NEQ","LES","GRT","GEQ","CHRLIT",
+	"REALIT","ID","AND","ARRAY","BEGAN","DIV","DO","ELSE","END","FOR",
 	"FUNCTION","IF","INTEGER","MOD","NOT","OF","OR","PROCEDURE",
 	"PROGRAM","REAL","REPEAT","THEN","TO","UNTIL","VAR","WHILE",
-	"INTLIT","REALIT","CHRLIT","ID","PLUS","MINUS","STAR","SLASH",
-	"LPAREN","RPAREN","LBRACKET","RBRACKET","COLON","SEMICOLON",
-	"COMMA","PERIOD","RANGE","ASSIGNOP","EQU","NEQ","LES","LEQ",
-	"GRT","GEQ","ERROR" 
+	"LEQ","ERROR" 
   };
 %}
 punctuation ("+"|"-"|"*"|"/"|"("|")"|"["|"]"|":"|";"|","|".."|":="|"="|"<>"|"<"|"<="|">"|">=")
@@ -113,7 +112,7 @@ emptySpace [ \t\n]+
 int yywrap(){return 1;}
 int TokenMgr(int t)
 {
-  TokenPrint(tfs,t);
+  TokenPrint(cout,t);
   colNo+= strlen(yytext); 
   return t;
 }
