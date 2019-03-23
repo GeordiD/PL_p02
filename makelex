@@ -1,0 +1,4 @@
+rm *.o
+rm p02lex.cpp
+rm p02
+make -f p02make
